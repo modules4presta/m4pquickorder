@@ -1,14 +1,22 @@
+{**
+ * m4pquickorder
+ *
+ * @author    Modules4Presta <contact@modules4presta.io>
+ * @copyright 2026 Nice Code sp. z o.o. (Modules4Presta)
+ * @license   https://opensource.org/licenses/MIT MIT License
+ *}
+
 <div id="m4pquickorder-block" class="container">
-  <h2>{l s='Quick Order' mod='m4pquickorder'}</h2>
+  <h2>{l s='Quick Order' d='Modules.M4pquickorder.Shop'}</h2>
   {if !$customer_logged && $hide_posible_to_order_for_guests}
     <div class="alert alert-info">
-      {l s='You have to be logged in to add products to cart and see prices.' mod='m4pquickorder'}
+      {l s='You have to be logged in to add products to cart and see prices.' d='Modules.M4pquickorder.Shop'}
     </div>
   {/if}
 
   {if $quickorder_error}
     <div class="alert alert-danger">
-      {l s='An error occurred while adding the product to your cart. You have probably entered too many products for the product.' mod='m4pquickorder'}
+      {l s='An error occurred while adding the product to your cart. You have probably entered too many products for the product.' d='Modules.M4pquickorder.Shop'}
     </div>
   {/if}
   
@@ -31,32 +39,32 @@
               <h5 class="card-title" style="white-space: nowrap; text-overflow: ellipsis; width: 100%; overflow: hidden;">{$product->name}</h5>
 
               <div class="mb-2 product-price" id="price_display_{$product->id}">
-                {if $price_old > $price_new}
-                  <span class="text-muted" style="text-decoration: line-through;">{Tools::displayPrice($price_old)}</span>
+                {if $entry.has_discount}
+                  <span class="text-muted" style="text-decoration: line-through;">{$price_old}</span>
                 {/if}
-                <span class="fw-bold ms-2">{Tools::displayPrice($price_new)}</span>
+                <span class="fw-bold ms-2">{$price_new}</span>
               </div>
 
               {if $combinations|@count > 0}
-                <label for="attr_{$product->id}" style="text-align: left;">{l s='Combination' mod='m4pquickorder'}</label>
+                <label for="attr_{$product->id}" style="text-align: left;">{l s='Combination' d='Modules.M4pquickorder.Shop'}</label>
                 <select id="attr_{$product->id}" name="attr[{$product->id}]" class="form-control mb-2" onchange="updatePrice({$product->id}, this.value)">
                   {foreach from=$combinations key=id_attr item=combo}
-                    <option value="{$id_attr}" data-old="{Tools::displayPrice($combo.price_old)}" data-new="{Tools::displayPrice($combo.price_new)}">{$combo.label}</option>
+                    <option value="{$id_attr}" data-old="{$combo.price_old}" data-new="{$combo.price_new}">{$combo.label}</option>
                   {/foreach}
                 </select>
               {/if}
 
-              <label for="qty_{$product->id}" style="text-align: left;">{l s='Quantity' mod='m4pquickorder'}</label>
-              <input type="number" id="qty_{$product->id}" name="qty[{$product->id}]" value="0" min="0" placeholder="{l s='Quantity' mod='m4pquickorder'}" class="form-control mt-auto" />
+              <label for="qty_{$product->id}" style="text-align: left;">{l s='Quantity' d='Modules.M4pquickorder.Shop'}</label>
+              <input type="number" id="qty_{$product->id}" name="qty[{$product->id}]" value="0" min="0" placeholder="{l s='Quantity' d='Modules.M4pquickorder.Shop'}" class="form-control mt-auto" />
             </div>
           </div>
         </div>
       {/foreach}
     </div>
 
-    {if $customer_logged && $hide_posible_to_order_for_guests}
+    {if $customer_logged || !$hide_posible_to_order_for_guests}
       <div class="text-right mt-3">
-        <button type="submit" name="submitQuickOrder" class="btn btn-primary">{l s='Order' mod='m4pquickorder'}</button>
+        <button type="submit" name="submitQuickOrder" class="btn btn-primary">{l s='Order' d='Modules.M4pquickorder.Shop'}</button>
       </div>
     {/if}
   </form>
