@@ -1,16 +1,11 @@
 <?php
 
 /**
- * LICENCE
+ * m4pquickorder
  *
- * ALL RIGHTS RESERVED.
- * YOU ARE NOT ALLOWED TO COPY/EDIT/SHARE/WHATEVER.
- *
- * IN CASE OF ANY PROBLEM CONTACT AUTHOR.
- *
- *  @author    Jan Kołodziej (contact@modules4presta.io)
- *  @copyright Modules4Presta.io
- *  @license   ALL RIGHTS RESERVED
+ * @author    Modules4Presta <contact@modules4presta.io>
+ * @copyright 2026 Nice Code sp. z o.o. (Modules4Presta)
+ * @license   https://opensource.org/licenses/MIT MIT License
  */
 
 if (!defined('_PS_VERSION_')) {
@@ -24,15 +19,15 @@ class M4pQuickOrder extends Module
         $this->name = 'm4pquickorder';
         $this->tab = 'front_office_features';
         $this->version = '1.0.0';
-        $this->author = 'Modules4Presta.io';
+        $this->author = 'Modules4Presta';
         $this->need_instance = 0;
         $this->bootstrap = true;
 
         parent::__construct();
 
-        $this->displayName = $this->l('Quick Order');
-        $this->description = $this->l('Provides a quick order form for selected products.');
-        $this->ps_versions_compliancy = ['min' => '1.7', 'max' => _PS_VERSION_];
+        $this->displayName = $this->trans('Quick Order', [], 'Modules.M4pquickorder.Admin');
+        $this->description = $this->trans('Provides a quick order form for selected products.', [], 'Modules.M4pquickorder.Admin');
+        $this->ps_versions_compliancy = ['min' => '1.7.6.0', 'max' => _PS_VERSION_];
     }
 
     public function install()
@@ -58,25 +53,25 @@ class M4pQuickOrder extends Module
             Configuration::updateValue('QUICKORDER_ENABLED', (bool) Tools::getValue('QUICKORDER_ENABLED'));
             Configuration::updateValue('QUICKORDER_PRODUCTS', implode(',', Tools::getValue('QUICKORDER_PRODUCTS')));
 
-            $output .= $this->displayConfirmation($this->l('Settings updated'));
+            $output .= $this->displayConfirmation($this->trans('Settings updated', [], 'Modules.M4pquickorder.Admin'));
         }
 
         $fields_form = [
             'form' => [
-                'legend' => ['title' => $this->l('Quick Order Settings')],
+                'legend' => ['title' => $this->trans('Quick Order Settings', [], 'Modules.M4pquickorder.Admin')],
                 'input' => [
                     [
                         'type' => 'switch',
-                        'label' => $this->l('Enable Quick Order'),
+                        'label' => $this->trans('Enable Quick Order', [], 'Modules.M4pquickorder.Admin'),
                         'name' => 'QUICKORDER_ENABLED',
                         'values' => [
-                            ['id' => 'on','value' => 1,'label' => $this->l('Enabled')],
-                            ['id' => 'off','value' => 0,'label' => $this->l('Disabled')]
+                            ['id' => 'on','value' => 1,'label' => $this->trans('Enabled', [], 'Modules.M4pquickorder.Admin')],
+                            ['id' => 'off','value' => 0,'label' => $this->trans('Disabled', [], 'Modules.M4pquickorder.Admin')]
                         ],
                     ],
                     [
                         'type' => 'select',
-                        'label' => $this->l('Select Products'),
+                        'label' => $this->trans('Select Products', [], 'Modules.M4pquickorder.Admin'),
                         'name' => 'QUICKORDER_PRODUCTS[]',
                         'multiple' => true,
                         'options' => [
@@ -87,7 +82,7 @@ class M4pQuickOrder extends Module
                         'class' => 'select2',
                     ],
                 ],
-                'submit' => ['title' => $this->l('Save')],
+                'submit' => ['title' => $this->trans('Save', [], 'Modules.M4pquickorder.Admin')],
             ],
         ];
 
@@ -100,9 +95,13 @@ class M4pQuickOrder extends Module
         $helper->fields_value['QUICKORDER_PRODUCTS[]'] = explode(',', Configuration::get('QUICKORDER_PRODUCTS'));
         $helper->submit_action = $this->name . '_submit';
 
-        $this->context->controller->addJquery();
-        $this->context->controller->addJqueryPlugin('select2');
-        $this->context->controller->addJS($this->_path . 'views/js/quickorder-admin.js');
+        $controller = $this->context->controller;
+        if (method_exists($controller, 'addJqueryPlugin')) {
+            $controller->addJqueryPlugin('select2');
+        }
+        if (method_exists($controller, 'addJS')) {
+            $controller->addJS($this->_path . 'views/js/quickorder-admin.js');
+        }
 
         return $output . $helper->generateForm([$fields_form]);
     }
@@ -119,6 +118,14 @@ class M4pQuickOrder extends Module
         }
 
         return $options;
+    }
+
+    protected function formatPrice($price)
+    {
+        return $this->context->currentLocale->formatPrice(
+            (float) $price,
+            $this->context->currency->iso_code
+        );
     }
 
     public function hookDisplayHome($params)
@@ -154,8 +161,8 @@ class M4pQuickOrder extends Module
                 $priceNew = (float)$product->getPrice(true, $idAttr);
                 $combinations[$idAttr] = [
                     'label'     => $label,
-                    'price_old' => $priceOld,
-                    'price_new' => $priceNew,
+                    'price_old' => $this->formatPrice($priceOld),
+                    'price_new' => $this->formatPrice($priceNew),
                     'stock'     => $stock,
                 ];
             }
@@ -178,8 +185,9 @@ class M4pQuickOrder extends Module
                 'product' => $product,
                 'combinations' => $combinations,
                 'cover' => $coverUrl,
-                'price_old' => $priceOldDef,
-                'price_new' => $priceNewDef,
+                'price_old' => $this->formatPrice($priceOldDef),
+                'price_new' => $this->formatPrice($priceNewDef),
+                'has_discount' => $priceOldDef > $priceNewDef,
                 'stock' => $stockDef,
             ];
         }
@@ -207,7 +215,7 @@ class M4pQuickOrder extends Module
                 $this->name,
                 'form',
                 [
-                    'token' => md5(Tools::getHttpHost(true) . $this->name)
+                    'token' => Tools::getToken(false),
                 ]
             ),
         ]);

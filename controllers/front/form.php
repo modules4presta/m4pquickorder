@@ -1,15 +1,11 @@
 <?php
+
 /**
- * LICENCE
+ * m4pquickorder
  *
- * ALL RIGHTS RESERVED.
- * YOU ARE NOT ALLOWED TO COPY/EDIT/SHARE/WHATEVER.
- *
- * IN CASE OF ANY PROBLEM CONTACT AUTHOR.
- *
- *  @author    Jan Kołodziej (contact@modules4presta.io)
- *  @copyright Modules4Presta.io
- *  @license   ALL RIGHTS RESERVED
+ * @author    Modules4Presta <contact@modules4presta.io>
+ * @copyright 2026 Nice Code sp. z o.o. (Modules4Presta)
+ * @license   https://opensource.org/licenses/MIT MIT License
  */
 
 class M4pQuickOrderFormModuleFrontController extends ModuleFrontController
@@ -26,7 +22,8 @@ class M4pQuickOrderFormModuleFrontController extends ModuleFrontController
         if (
             empty(Tools::getValue('qty'))
             || empty(Tools::getValue('token'))
-            || Tools::getValue('token') != md5(Tools::getHttpHost(true) . $this->name)
+            || !Tools::getValue('token')
+            || !hash_equals(Tools::getToken(false), (string) Tools::getValue('token'))
         ) {
             Tools::redirect('/');
         }

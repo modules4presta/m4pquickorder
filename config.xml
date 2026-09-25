@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <module>
 	<name>m4pquickorder</name>
-	<displayName><![CDATA[M4P Szybkie zamówienie]]></displayName>
+	<displayName><![CDATA[M4P Quick Order]]></displayName>
 	<version><![CDATA[1.0.0]]></version>
-	<description><![CDATA[Formularz szybkiego zamówienia na stronie głównej: wybrane produkty z polami ilości i jednym przyciskiem do koszyka.]]></description>
+	<description><![CDATA[Quick order form on the home page: selected products with quantity fields and one button to the cart.]]></description>
 	<author><![CDATA[Modules4Presta]]></author>
 	<tab><![CDATA[front_office_features]]></tab>
 	<is_configurable>1</is_configurable>
