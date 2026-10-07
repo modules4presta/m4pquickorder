@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<module>
+	<name>m4pquickorder</name>
+	<displayName><![CDATA[M4P Quick Order]]></displayName>
+	<version><![CDATA[1.0.0]]></version>
+	<description><![CDATA[Quick order form on the home page: selected products with quantity fields and one button to the cart.]]></description>
+	<author><![CDATA[Modules4Presta]]></author>
+	<tab><![CDATA[front_office_features]]></tab>
+	<is_configurable>1</is_configurable>
+	<need_instance>0</need_instance>
+</module>

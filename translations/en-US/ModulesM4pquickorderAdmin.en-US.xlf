@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="module" source-language="en-US" target-language="en-US" datatype="plaintext">
+    <body>
+      <trans-unit id="ef0c6dc825df5280fe98c1bb42c310c7">
+        <source>Quick Order</source>
+        <target>Quick Order</target>
+      </trans-unit>
+      <trans-unit id="92c1e8a2b157ee8bef91259718e9241c">
+        <source>Provides a quick order form for selected products.</source>
+        <target>Provides a quick order form for selected products.</target>
+      </trans-unit>
+      <trans-unit id="c888438d14855d7d96a2724ee9c306bd">
+        <source>Settings updated</source>
+        <target>Settings updated</target>
+      </trans-unit>
+      <trans-unit id="c475fe66a963e3f463913b933f89b9d3">
+        <source>Quick Order Settings</source>
+        <target>Quick Order Settings</target>
+      </trans-unit>
+      <trans-unit id="4c18a83ef7c6d9bc9ff321ff375cefe5">
+        <source>Enable Quick Order</source>
+        <target>Enable Quick Order</target>
+      </trans-unit>
+      <trans-unit id="00d23a76e43b46dae9ec7aa9dcbebb32">
+        <source>Enabled</source>
+        <target>Enabled</target>
+      </trans-unit>
+      <trans-unit id="b9f5c797ebbf55adccdd8539a65a0241">
+        <source>Disabled</source>
+        <target>Disabled</target>
+      </trans-unit>
+      <trans-unit id="f18d700c58f38e40c913a965f0cae794">
+        <source>Select Products</source>
+        <target>Select Products</target>
+      </trans-unit>
+      <trans-unit id="c9cc8cce247e49bae79f15173ce97354">
+        <source>Save</source>
+        <target>Save</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

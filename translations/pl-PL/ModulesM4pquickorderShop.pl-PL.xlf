@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="module" source-language="en-US" target-language="pl-PL" datatype="plaintext">
+    <body>
+      <trans-unit id="ef0c6dc825df5280fe98c1bb42c310c7">
+        <source>Quick Order</source>
+        <target>Szybkie zamówienie</target>
+      </trans-unit>
+      <trans-unit id="6c23962f0de575a4efaabbb16adf97b2">
+        <source>You have to be logged in to add products to cart and see prices.</source>
+        <target>Musisz się zalogować, aby zobaczyć ceny i dodawać produkty do koszyka.</target>
+      </trans-unit>
+      <trans-unit id="764166ab7cebe325faf271ec8d356640">
+        <source>An error occurred while adding the product to your cart. You have probably entered too many products for the product.</source>
+        <target>Nie udało się dodać produktu do koszyka. Prawdopodobnie podana ilość przekracza dostępny stan magazynowy.</target>
+      </trans-unit>
+      <trans-unit id="47ac923d219501859fb68fed8c8db77b">
+        <source>Combination</source>
+        <target>Wariant</target>
+      </trans-unit>
+      <trans-unit id="694e8d1f2ee056f98ee488bdc4982d73">
+        <source>Quantity</source>
+        <target>Ilość</target>
+      </trans-unit>
+      <trans-unit id="a240fa27925a635b08dc28c9e4f9216d">
+        <source>Order</source>
+        <target>Zamów</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

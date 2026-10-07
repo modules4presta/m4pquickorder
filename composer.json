@@ -1,0 +1,20 @@
+{
+    "name": "modules4presta/m4pquickorder",
+    "description": "Quick order form for PrestaShop: selected products with quantity fields and one button to the cart.",
+    "type": "prestashop-module",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Nice Code sp. z o.o. (Modules4Presta)",
+            "email": "contact@modules4presta.io",
+            "homepage": "https://nice-code.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.2.5"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "homepage": "https://nice-code.com/pl/produkty/sklep-b2b-prestashop"
+}
